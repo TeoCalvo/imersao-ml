@@ -57,7 +57,3 @@ Faremos nosso primeiro algoritmo de Machine Learning na mão.
 * Recall
 * Curva ROC
 * f1-score
-
-## Dados
-
-Utilize este [link](link/xpto) para realizar o download das bases de dados.
