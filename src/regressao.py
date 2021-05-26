@@ -54,3 +54,34 @@ plt.xlabel("Cerveja")
 plt.ylabel("Nota")
 plt.title("Relação Cerveja e Nota")
 plt.legend(["Observações", "Modelo"])
+
+# %%
+
+# Ajustando árvore de decisão
+
+# Importa modelos de árvore
+from sklearn import tree
+
+# Define um objeto de árvore de decisão
+tree_reg_full = tree.DecisionTreeRegressor(criterion="mse")
+
+tree_reg_2 = tree.DecisionTreeRegressor(criterion="mse",
+                                        max_depth=2 )
+
+X = data[ ["Cerveja"] ] # Isso retorn um DF
+y = data["Nota"] # Isso retorna uma Series
+tree_reg_full.fit(X,y) # Ajusta a árvore
+tree_reg_2.fit(X,y) # Ajusta a árvore
+
+values = [[i] for i in range(0,11)] # Novo X
+y_pred_full = tree_reg_full.predict(values) # Predição de y ou y chapeu
+y_pred_2 = tree_reg_2.predict(values) # Predição de y ou y chapeu
+
+plt.plot( data["Cerveja"], data["Nota"], "o" ) # y verdadeiro
+plt.plot( values, y_pred_full, "-" ) # y estimado
+plt.plot( values, y_pred_2, "-" ) # y estimado
+plt.grid(True)
+plt.xlabel("Cerveja")
+plt.ylabel("Nota")
+plt.title("Relação Cerveja e Nota")
+plt.legend(["Observações", "Árvore Full", "Árvore max_depth=2"])
