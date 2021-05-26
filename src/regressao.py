@@ -45,10 +45,10 @@ print(f" Beta0 = {b0} | Beta1 = {b1}")
 # %%
 
 values = [[i] for i in range(0,11)] # Novo X
-y_pred = model.predict(values) # Predição de y ou y chapeu
+y_pred_reg = model.predict(values) # Predição de y ou y chapeu
 
 plt.plot( data["Cerveja"], data["Nota"], "o" ) # y verdadeiro
-plt.plot( values, y_pred, "-" ) # y estimado
+plt.plot( values, y_pred_reg, "-" ) # y estimado
 plt.grid(True)
 plt.xlabel("Cerveja")
 plt.ylabel("Nota")
@@ -85,3 +85,41 @@ plt.xlabel("Cerveja")
 plt.ylabel("Nota")
 plt.title("Relação Cerveja e Nota")
 plt.legend(["Observações", "Árvore Full", "Árvore max_depth=2"])
+
+# %% 
+
+## Métricas de ajuste de modelos de Regressão
+
+from sklearn import metrics
+
+
+pred_y_reg = model.predict( data[["Cerveja"]] )
+pred_y_arvore_full = tree_reg_full.predict( data[["Cerveja"]] )
+pred_y_arvore_2 = tree_reg_2.predict( data[["Cerveja"]] )
+
+mse_regressao = metrics.mean_squared_error(y, pred_y_reg)
+mse_arvore_full = metrics.mean_squared_error(y, pred_y_arvore_full)
+mse_arvore_2 = metrics.mean_squared_error(y, pred_y_arvore_2)
+
+print("MSE Regressão Linear:", mse_regressao)
+print("MSE Árvore Full:", mse_arvore_full)
+print("MSE Árvore max_depth = 2:", mse_arvore_2)
+
+# %%
+
+mae_regressao = metrics.mean_absolute_error(y, pred_y_reg)
+mae_arvore_full = metrics.mean_absolute_error(y, pred_y_arvore_full)
+mae_arvore_2 = metrics.mean_absolute_error(y, pred_y_arvore_2)
+
+print("MAE Regressão Linear:", mae_regressao)
+print("MAE Árvore Full:", mae_arvore_full)
+print("MAE Árvore max_depth = 2:", mae_arvore_2)
+
+# %%
+r2_regressao = metrics.r2_score(y, pred_y_reg)
+r2_arvore_full = metrics.r2_score(y, pred_y_arvore_full)
+r2_arvore_2 = metrics.r2_score(y, pred_y_arvore_2)
+
+print("R2 Regressão Linear:", r2_regressao)
+print("R2 Árvore Full:", r2_arvore_full)
+print("R2 Árvore max_depth = 2:", r2_arvore_2)
