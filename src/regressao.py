@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import graphviz 
+
 
 # %%
 np.random.seed(28)
@@ -123,3 +125,18 @@ r2_arvore_2 = metrics.r2_score(y, pred_y_arvore_2)
 print("R2 Regressão Linear:", r2_regressao)
 print("R2 Árvore Full:", r2_arvore_full)
 print("R2 Árvore max_depth = 2:", r2_arvore_2)
+
+# %%
+
+# Plot da árvore de Decisão
+classes = data["Nota"].unique()
+classes.sort()
+
+dot_data = tree.export_graphviz(tree_reg_full, out_file=None, 
+                     feature_names=["Cerveja"],  
+                     class_names=classes,  
+                     filled=True, rounded=True,  
+                     special_characters=True)  
+graph = graphviz.Source(dot_data)  
+graph 
+# %%
