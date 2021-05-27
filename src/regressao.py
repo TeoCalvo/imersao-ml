@@ -136,7 +136,9 @@ dot_data = tree.export_graphviz(tree_reg_full, out_file=None,
                      feature_names=["Cerveja"],  
                      class_names=classes,  
                      filled=True, rounded=True,  
-                     special_characters=True)  
+                     special_characters=True)
+
 graph = graphviz.Source(dot_data)  
 graph 
+
 # %%
