@@ -101,10 +101,7 @@ pred_y_arvore_2 = tree_reg_2.predict( data[["Cerveja"]] )
 
 mse_regressao = metrics.mean_squared_error(y, pred_y_reg)
 mse_arvore_full = metrics.mean_squared_error(y, pred_y_arvore_full)
-mse_arvore_2 = metrics.mean_squared_error(y, pred_y_arvore_2)
-
-print("MSE Regressão Linear:", mse_regressao)
-print("MSE Árvore Full:", mse_arvore_full)
+mse_arvore_2 = metrics.mdata[["Cerveja"]], data["Aprovado"], mse_arvore_full)
 print("MSE Árvore max_depth = 2:", mse_arvore_2)
 
 # %%
