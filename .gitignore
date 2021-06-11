@@ -5,3 +5,6 @@
 *analise.py
 *.gif
 *animacao.py
+*.pyc
+__pycache__
+_pycache_

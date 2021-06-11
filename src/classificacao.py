@@ -111,3 +111,13 @@ pred_tree_entropy = clf_tree_entropy.predict(data[["Cerveja"]])
 pred_nb = clf_nb.predict(data[["Cerveja"]])
 
 from sklearn import metrics
+
+ac_rl = metrics.accuracy_score( data["Aprovado"], pred_rl)
+ac_gini = metrics.accuracy_score( data["Aprovado"], pred_tree_gini)
+ac_entropy = metrics.accuracy_score( data["Aprovado"], pred_tree_entropy)
+ac_nb = metrics.accuracy_score( data["Aprovado"], pred_nb)
+
+print("Acurácia de rl:", ac_rl)
+print("Acurácia de gini:", ac_gini)
+print("Acurácia de entropy:", ac_entropy)
+print("Acurácia de nb:", ac_nb)
