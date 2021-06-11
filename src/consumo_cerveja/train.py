@@ -157,10 +157,35 @@ cv_result.mean().abs()
 
 # FLUXO DEFINITIVO
 
-df_oot = df.iloc[:-30]
-df_train = df.iloc[-30:]
-
+# Deifnindo variáveis e target
 target = "Consumo de cerveja (litros)"
 features = df.columns.tolist()[1:-1]
 
-model = tree.DecisionTreeRegressor(max_depth=4)
+# Separando em base out of time
+df_oot = df.iloc[-30:]
+df_train = df.iloc[:-30]
+
+# Deifnindo modelo de validação cruzada
+model = tree.DecisionTreeRegressor(max_depth=3)
+cv_result = model_selection.cross_validate( model,
+                                            df_train[features],
+                                            df_train[target],
+                                            cv=4,
+                                            return_train_score=True,
+                                            scoring='neg_mean_absolute_error' )
+
+cv_result = pd.DataFrame( cv_result )
+
+# Verifica performance na validação cruzada
+cv_result.mean().abs()
+
+# Refita o modelo para base de treinamento
+model.fit(df_train[features], df_train[target])
+
+# Analise performance na base de Out of Time
+pred_oot = model.predict(df_oot[features])
+print("MAE OOT:", metrics.mean_absolute_error( df_oot[target],
+                                               pred_oot))
+
+# Fit para base completa, este modelo que vai para produção
+model.fit(df[features], df[target])
