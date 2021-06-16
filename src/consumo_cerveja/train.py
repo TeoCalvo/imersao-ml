@@ -1,5 +1,5 @@
 # %%
-from numpy import object0
+
 import pandas as pd
 
 # %%
